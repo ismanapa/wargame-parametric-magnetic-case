@@ -35,12 +35,17 @@ difference()
 {
     cube([platformX, platformY, 4]);
     
-    for (ix = [0:baseNumberX-1])
-        for(iy = [0:baseNumberY-1])
-            translate([ 
-                ((platformPadding + baseDiamater/2) + (ix * (baseDiamater + finalSeparationX)) ), 
-                ((platformPadding + baseDiamater/2) + (iy * (baseDiamater + finalSeparationY)) ),
-                2
-            ])
-            cylinder(r=baseDiamater/2, h=8,$fn=100);
+    if (baseNumberY > 0 && baseNumberX > 0) {
+
+        for (ix = [0:baseNumberX-1])
+            for(iy = [0:baseNumberY-1])
+                translate([ 
+                    ((platformPadding + baseDiamater/2) + (ix * (baseDiamater + finalSeparationX)) ), 
+                    ((platformPadding + baseDiamater/2) + (iy * (baseDiamater + finalSeparationY)) ),
+                    2
+                ])
+                cylinder(r=baseDiamater/2, h=8,$fn=100);
+    }
+
 }
+
