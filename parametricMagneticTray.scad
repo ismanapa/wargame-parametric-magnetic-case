@@ -39,13 +39,16 @@ difference()
 
         for (ix = [0:baseNumberX-1])
             for(iy = [0:baseNumberY-1])
-                translate([ 
-                    ((platformPadding + baseDiamater/2) + (ix * (baseDiamater + finalSeparationX)) ), 
-                    ((platformPadding + baseDiamater/2) + (iy * (baseDiamater + finalSeparationY)) ),
-                    2
-                ])
-                cylinder(r=baseDiamater/2, h=8,$fn=100);
+                makeBase(ix, iy);
     }
+}
 
+module makeBase(ix, iy) {
+    translate([ 
+        ((platformPadding + baseDiamater/2) + (ix * (baseDiamater + finalSeparationX)) ), 
+        ((platformPadding + baseDiamater/2) + (iy * (baseDiamater + finalSeparationY)) ),
+        2
+    ])
+    cylinder(r=baseDiamater/2, h=8,$fn=100);
 }
 
