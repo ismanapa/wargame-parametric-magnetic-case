@@ -1,11 +1,5 @@
-//Printing Area X
-printAreaX = 150;
-
-//Printing Area Y
-printAreaY = 150;
-
 //Platform X
-platformX = 300;
+platformX = 150;
 
 //Platform Y
 platformY = 150;
@@ -89,9 +83,5 @@ module makeTray(widthX, widthY) {
  
 }
 
-//TODO: make this adaptable to input parameters
-makeTray(150, 150);
+makeTray(platformX, platformY);
 
-// translate([180, 0, 0]) {
-//     makeTray(150, 150);
-// }
