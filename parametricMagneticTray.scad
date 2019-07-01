@@ -22,19 +22,21 @@ baseSeparationY = 5;
 //Platform margin
 platformPadding = 10;
 
-module makeTray(widthX, widthY, hasLeftUnion = false, hasRightUnion = false) {
+module makeTray(widthX, widthY) {
 
     //X Axis calculations
     baseNumberX = floor((widthX - platformPadding*2 + baseSeparationX) / (baseDiamater + baseSeparationX));
     availableSpaceX = ((widthX - platformPadding*2) - (baseNumberX * baseDiamater));
-    finalSeparationX = availableSpaceX > 0 ? availableSpaceX / (baseNumberX - 1) : 0;
+    finalSeparationX = availableSpaceX > 0 ? ( baseNumberX > 1 ? availableSpaceX / (baseNumberX - 1) : availableSpaceX) : 0;
 
+    echo(availableSpaceX);
     echo("<h1>SPACE BETWEEN BASES X", finalSeparationX, "</h1>");
 
     //Y Axis calculations
     baseNumberY = floor((widthY - platformPadding*2 + baseSeparationY) / (baseDiamater + baseSeparationY));
     availableSpaceY = ((widthY - platformPadding*2) - (baseNumberY * baseDiamater));
-    finalSeparationY = availableSpaceY > 0 ? availableSpaceY / (baseNumberY - 1) : 0;
+    finalSeparationY = availableSpaceY > 0 ? ( baseNumberY > 1 ? availableSpaceY / (baseNumberY - 1) : availableSpaceY) : 0;
+
 
     echo("<h1>SPACE BETWEEN BASES Y", finalSeparationY, "</h1>");
 
@@ -48,44 +50,48 @@ module makeTray(widthX, widthY, hasLeftUnion = false, hasRightUnion = false) {
         }
     }
 
-    union() {
-        difference() {
-            cube([widthX, widthY, 4]);
-            
-            if (baseNumberY > 0 && baseNumberX > 0) {
-                for (ix = [0:baseNumberX-1])
-                    for(iy = [0:baseNumberY-1])
-                        makeBase(ix, iy);
-            }
+    difference() {
+        cube([widthX, widthY, 4]);
+        
+        if (baseNumberY > 0 && baseNumberX > 0) {
+            for (ix = [0:baseNumberX-1])
+                for(iy = [0:baseNumberY-1])
+                    makeBase(ix, iy);
+        }
 
-            if (hasRightUnion) {
-                //Right union
-                translate([widthX - 10, widthY / 3 - 5, -1]) {
-                    cube([11, 10, 3]);
+        translate([-1, 0, 2]) {
+            rotate([0, 90, 0]) {
+                translate([0, widthY/3, 0]) {
+                    cylinder(r=1, h=platformPadding, $fn=100);
                 }
-                
-                translate([widthX - 10, widthY / 3 * 2 - 5, -1]) {
-                    cube([11, 10, 3]);
+
+                translate([0, widthY/3*2, 0]) {
+                    cylinder(r=1, h=platformPadding, $fn=100);
                 }
             }
         }
 
-        if (hasLeftUnion) {
-            //Left union
-            translate([-10, widthY / 3 - 5, -1]) {
-                cube([10, 10, 3]);
+        translate([widthX - platformPadding + 1, 0, 2]) {
+            rotate([0, 90, 0]) {
+                translate([0, widthY/3, 0]) {
+                    cylinder(r=1, h=platformPadding, $fn=100);
+                }
+
+                translate([0, widthY/3*2, 0]) {
+                    cylinder(r=1, h=platformPadding, $fn=100);
+                }
             }
-            
-            translate([-10, widthY / 3 * 2 - 5, -1]) {
-                cube([10, 10, 3]);
-            }
-        }   
+        }
+      
     }
+
+     
+ 
 }
 
 //TODO: make this adaptable to input parameters
-makeTray(150, 150, false, true);
+makeTray(150, 150);
 
-translate([180, 0, 0]) {
-    makeTray(150, 150, true, false);
-}
+// translate([180, 0, 0]) {
+//     makeTray(150, 150);
+// }
