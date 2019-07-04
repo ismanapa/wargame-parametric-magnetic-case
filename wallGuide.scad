@@ -23,7 +23,8 @@ difference() {
         cube([(widthX - wallWidth - 1.5), (widthY - wallWidth - 1.5), height + 2]);
     }
 
-    translate([wallWidth / 2 + 2 , widthY - 2 - wallWidth / 2, -1]) {
+    // Join holes
+    translate([3.5 , widthY - 3.5, -1]) {
         cylinder(r=1.25, h=11, $fn=100);
         translate([0, 0, height - 8]){
             cylinder(r=1.25, h=11, $fn=100);

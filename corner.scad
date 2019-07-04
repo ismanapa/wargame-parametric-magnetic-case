@@ -1,16 +1,23 @@
 
-widthX = 15;
+widthX = 20;
 
-widthY = 15;
+widthY = 20;
 
 height = 10;
 
 wallWidth = 3;
 
+outerWidth = 5;
+
 difference() {
     cube([widthX, widthY, height]);
 
-    translate([5, -1, height - wallWidth - 1 ]) {
-        cube([widthX + 1, widthY - 4, wallWidth + 2]);
+    translate([outerWidth + 0.5, -1, height - wallWidth ]) {
+        cube([widthX + 1, widthY - outerWidth + 0.5, wallWidth + 2]);
+    }
+
+    // Join holes
+    translate([3.5 , widthY - 3.5, 2]) {
+        cylinder(r=1.25, h=11, $fn=100);
     }
 }
