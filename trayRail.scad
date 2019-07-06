@@ -1,4 +1,5 @@
-height = 146;
+width = 136;
+height = 2;
 
-cube([9, 2, height]);
+cube([9, width, height]);
 
