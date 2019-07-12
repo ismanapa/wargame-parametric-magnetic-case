@@ -7,6 +7,8 @@ height = 150;
 
 wallWidth = 3;
 
+traySeparator = 7.5;
+
 difference() {
 
     cube([widthX, widthY, height]);
@@ -42,7 +44,7 @@ translate([(widthX + 20), 0, 0]) {
     difference() {
         cube([localWidth, (widthY - wallWidth - 2.5), height]);
 
-        for (currentHeight=[7.5:7.5:height]) {
+        for (currentHeight=[traySeparator:traySeparator:height]) {
             if (currentHeight < height) {
                 translate([0, 0, currentHeight]){
                     makeSupportJoin(localWidth);
