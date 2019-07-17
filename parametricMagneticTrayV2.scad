@@ -41,9 +41,19 @@ module makeTray(widthX, widthY) {
             1
         ]) {
             difference(){
-                cylinder(r=(baseDiamater+1.5)/2, h=1,$fn=100);
+                cylinder(r=(baseDiamater+1.5)/2, h=1.5,$fn=100);
                 cylinder(r=baseDiamater/2, h=3,$fn=100);
             }
+        }
+    }
+
+    module makeCenter(ix, iy){
+        translate([ 
+            ((platformPadding + baseDiamater/2) + (ix * (baseDiamater + finalSeparationX)) ), 
+            ((platformPadding + baseDiamater/2) + (iy * (baseDiamater + finalSeparationY)) ),
+            -1
+        ]) {
+            cylinder(r=1.5, h=2,$fn=100);
         }
     }
 
@@ -78,6 +88,12 @@ module makeTray(widthX, widthY) {
                         cylinder(r=1, h=platformPadding, $fn=100);
                     }
                 }
+            }
+
+            if (baseNumberY > 0 && baseNumberX > 0) {
+                for (ix = [0:baseNumberX-1])
+                    for(iy = [0:baseNumberY-1])
+                        makeCenter(ix, iy);
             }
         
         }
