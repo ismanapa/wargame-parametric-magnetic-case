@@ -16,6 +16,9 @@ baseSeparationY = 5;
 //Platform margin
 platformPadding = 10;
 
+//Base height
+baseHeight = 1.5;
+
 module makeTray(widthX, widthY) {
 
     //X Axis calculations
@@ -41,7 +44,7 @@ module makeTray(widthX, widthY) {
             1
         ]) {
             difference(){
-                cylinder(r=(baseDiamater+1.5)/2, h=1.5,$fn=100);
+                cylinder(r=(baseDiamater+1.5)/2, h=baseHeight,$fn=100);
                 cylinder(r=baseDiamater/2, h=3,$fn=100);
             }
         }
